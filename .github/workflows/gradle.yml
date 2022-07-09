@@ -22,18 +22,20 @@ jobs:
       with:
         java-version: '16'
         distribution: 'zulu'
+    - name: Set permissions
+      run: chmod 777 gradlew
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build
-    - name: Print Status
+    - name: Print status
       run: |
         echo "## Build Status" >> $GITHUB_STEP_SUMMARY
         echo "### Build Files" >> $GITHUB_STEP_SUMMARY
         ls build/libs >> $GITHUB_STEP_SUMMARY
         echo "### Build Times" >> $GITHUB_STEP_SUMMARY
         data >> $GITHUB_STEP_SUMMARY
-    - name: Upload Build Artifacts
+    - name: Upload build artifacts
       uses: actions/upload-artifact@v3.1.0
       with:
         name: Finished-Products
