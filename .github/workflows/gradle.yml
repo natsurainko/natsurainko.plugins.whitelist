@@ -1,0 +1,41 @@
+name: Build Plugins
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: 
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 16
+      uses: actions/setup-java@v3
+      with:
+        java-version: '16'
+        distribution: 'zulu'
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: build
+    - name: Print Status
+      run: |
+        echo "## Build Status" >> $GITHUB_STEP_SUMMARY
+        echo "### Build Files" >> $GITHUB_STEP_SUMMARY
+        ls build/libs >> $GITHUB_STEP_SUMMARY
+        echo "### Build Times" >> $GITHUB_STEP_SUMMARY
+        data >> $GITHUB_STEP_SUMMARY
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: Finished-Products
+        path: build/libs/*
+        retention-days: 90
