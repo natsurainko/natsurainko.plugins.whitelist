@@ -1,2 +1,2 @@
 # natsurainko.plugins.whitelist
-a whitelist for waterfall server
+a whitelist plugin for minecraft waterfall server
