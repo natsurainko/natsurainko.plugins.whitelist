@@ -1,0 +1,4 @@
+name: Whitelist
+version: '${version}'
+main: natsurainko.plugins.whitelist.Whitelist
+description: a whitelist for waterfall server
