@@ -28,9 +28,9 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build
-    - name: Print status
+    - name: Print summary
       run: |
-        echo "## Build Status" >> $GITHUB_STEP_SUMMARY
+        echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
         echo "### Build Files" >> $GITHUB_STEP_SUMMARY
         ls build/libs >> $GITHUB_STEP_SUMMARY
         echo "### Build Times" >> $GITHUB_STEP_SUMMARY
