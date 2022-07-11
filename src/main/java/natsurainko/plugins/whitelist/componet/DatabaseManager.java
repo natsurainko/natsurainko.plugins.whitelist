@@ -80,4 +80,24 @@ public class DatabaseManager {
                         .replace("{1}", filter))
                 .execute();
     }
+
+    public List<WhiteListItem> searchItem(String type, String filter) throws SQLException {
+        String statement =
+                "SELECT * FROM natsurainko_whitelist WHERE {0}=\'{1}\'";
+        List<WhiteListItem> whiteList = new ArrayList<WhiteListItem>();
+
+        ResultSet resultSet = getConnection().prepareStatement(statement
+                .replace("{0}", type)
+                .replace("{1}", filter))
+                .executeQuery();
+        while (resultSet.next()){
+            whiteList.add(new WhiteListItem(
+                    resultSet.getString("uuid"),
+                    resultSet.getString("qNumber"),
+                    resultSet.getString("id"))
+            );
+        }
+
+        return whiteList;
+    }
 }
